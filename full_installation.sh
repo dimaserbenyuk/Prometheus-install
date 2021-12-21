@@ -9,6 +9,8 @@
 # sudo pwd
 # ./full_installation.sh
 
+
+
 ./prometheus.sh
 ./node.sh
 ./blackbox.sh
