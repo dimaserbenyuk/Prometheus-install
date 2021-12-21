@@ -70,3 +70,4 @@ just to make sure, `sudo` in scripts won't interrupt you. And to install individ
 * Blackbox Exporter: `./blackbox.sh`
 * Grafana: `./grafana.sh`
 # Prometheus-install
+# Prometheus-install
