@@ -4,6 +4,5 @@
 ./node_uninstall.sh
 ./blackbox_uninstall.sh
 ./alertmanager_uninstall.sh
+./grafana_unistall.sh
 
-# Uninstall grafana
-# ???

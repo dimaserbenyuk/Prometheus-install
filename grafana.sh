@@ -1,16 +1,18 @@
 #!/bin/bash
 
 # Download grafana
-wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_4.6.3_amd64.deb
+sudo apt-get install -y gnupg2 curl software-properties-common
+curl https://packages.grafana.com/gpg.key | sudo apt-key add -
+sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
 
 # Install grafana
-sudo apt-get install -y adduser libfontconfig
-sudo dpkg -i grafana_4.6.3_amd64.deb
+sudo apt update
+sudo apt install grafana
 
 # systemd
 sudo systemctl daemon-reload
 sudo systemctl enable grafana-server
 sudo systemctl start grafana-server
 
-# Installation cleanup
-rm grafana_4.6.3_amd64.deb
+
+
