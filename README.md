@@ -1,10 +1,8 @@
-# Prometheus Installation Script for Ubuntu 16.04 and 18.04 LTS
+# Prometheus Installation Script for Ubuntu
 
 **Important:** This is a work in progress.
 
 **Even more important:** If you actually plan to use this do not forget to edit configuration files to your needs (service files, YAML configuration files, etc.). Configuration files provided here are just generic files.
-
-More about it here: [gist](https://gist.github.com/petarGitNik/18ae938aaef4c4ff58189df8a4fc7de9).
 
 This script downloads the files in the current directory. You could change this.
 
@@ -71,14 +69,20 @@ just to make sure, `sudo` in scripts won't interrupt you. And to install individ
 * Grafana: `./grafana.sh`
 # Creating Grafana Dashboard
 
+Now lets build a dashboard in Grafana so then it will able to reflect the metrics of the Linux system.
+
+So we will use 14513 to import Grafana.com, Lets come to Grafana Home page and you can see a “+” icon.
+Click on that and select “Import”
+
 * [Node Exporter Full](https://grafana.com/grafana/dashboards/1860)
 * 14513 - Node Exporter Full
 
 * [Node Exporter for Prometheus Dashboard EN v20201010](https://grafana.com/grafana/dashboards/11074)
 * 11074 - Node Exporter for Prometheus Dashboard EN v20201010
 
-Now lets build a dashboard in Grafana so then it will able to reflect the metrics of the Linux system.
+* [Prometheus Blackbox Exporter](https://grafana.com/grafana/dashboards/7587)
+* 7587 - Prometheus Blackbox Exporter
 
-So we will use 14513 to import Grafana.com, Lets come to Grafana Home page and you can see a “+” icon.
-Click on that and select “Import”
+* [Alertmanager](https://grafana.com/grafana/dashboards/9578)
+* 9587 - Alertmanager
 

@@ -1,0 +1,80 @@
+groups:
+  - name: HTTP-SVC-BASE-CHECKS
+    rules:
+    - alert: RequestsReponseTimeBelow
+      expr: probe_duration_seconds{job="HTTP-blackbox-check"} > 2
+      for: 1m
+      labels:
+        severity: "P3"
+      annotations:
+        summary: "Service is taking longer than 2 seconds to respond"
+        description: "The service name is {{ $labels.job }}. The URL under test is {{ $labels.instance }}"
+       #receivers:
+
+    - alert: HTTPAvailabilityCheck
+      expr: probe_success != 1
+      for: 30s
+      labels:
+        severity: "P1"
+      annotations:
+        summary: "Service is not available at endpoint"
+        description: "The service name {{ $labels.job }} is no longer reachable from external. The following URL is no longer reachable {{ $labels.instance }}"
+      #receivers:
+
+    - alert: 4xxAboveAcceptableThreshold
+      expr: http_requests_total{status=~"4.."} >= 10
+      for: 3m
+      labels:
+        severity: "P2"
+      annotations:
+        summary: "The number of 4xx http status codes"
+        description: "The service {{ $labels.job }} on instance {{ $labels.instance }} is experiencing a high number of HTTP 400's error codes . The code displayed is {{ $labels.code }}"
+      #receivers:
+
+    - alert: 5xxDetected
+      expr: rate(http_requests_total{job="http-simulator", status=~"5.."}[1m]) >= 1
+      for: 2m
+      labels:
+        severity: "P1"
+      annotations:
+        summary: "The number of 5xx http status codes"
+        description: "The service {{ $labels.job }} on instance {{ $labels.instance }} is experiencing a high number of HTTP 500's error codes . The HTTP status code is  {{ $labels.status }}"
+      #receivers:
+
+
+  - name: HTTP-SVC-SSL-CHECKS
+    rules:
+    ## SSL certificates issue
+    - alert: SSLCertificatesExpiringIn14Days
+      expr: timestamp(probe_ssl_earliest_cert_expiry) < 1209600
+      for: 1h
+      labels:
+        severity: "P3"
+        risk: "Disruption"
+      annotations:
+        summary: "SSL certificate expiring in 14 Days"
+        description: "The service {{ $labels.job }} has SSL certificates expiring in 14 days. The URL that the certificate belongs to is {{ $labels.instance }}"
+      #receivers:
+
+
+    - alert: SSLCertificatesExpiringIn7Days
+      expr: timestamp(probe_ssl_earliest_cert_expiry) < 604800
+      for: 1h
+      labels:
+        severity: "P3"
+        risk: "Disruption"
+      annotations:
+        summary: "SSL certificate expiring in 7 Days"
+        description: "The service {{ $labels.job }} has SSL certificates expiring in 7 days. The URL that the certificate belongs to is {{ $labels.instance }}"
+      #receivers:
+
+
+    - alert: SSLCertificatesExpiringIn3Days
+      expr: timestamp(probe_ssl_earliest_cert_expiry) < 302400
+      for: 1h
+      labels:
+        severity: "P3"
+        risk: "Disruption"
+      annotations:
+        summary: "SSL certificate expiring in 3 Days"
+        description: "The service {{ $labels.job }} has SSL certificates expiring in 3 days. The URL that the certificate belongs to is {{ $labels.instance }}"

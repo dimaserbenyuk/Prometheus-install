@@ -7,7 +7,7 @@ sudo adduser --no-create-home --disabled-login --shell /bin/false --gecos "Prome
 sudo mkdir /etc/prometheus
 sudo mkdir /var/lib/prometheus
 sudo touch /etc/prometheus/prometheus.yml
-sudo touch /etc/prometheus/prometheus.rules.yml
+sudo touch /etc/prometheus/rules/Blackbox_Exporter.yml
 
 # Assign ownership of the files above to prometheus user
 sudo chown -R prometheus:prometheus /etc/prometheus
@@ -32,7 +32,7 @@ sudo chown prometheus:prometheus /usr/local/bin/promtool
 
 # Populate configuration files
 cat ./prometheus/prometheus.yml | sudo tee /etc/prometheus/prometheus.yml
-cat ./prometheus/prometheus.rules.yml | sudo tee /etc/prometheus/prometheus.rules.yml
+cat ./prometheus/rules/Blackbox_Exporter.yml | sudo tee /etc/prometheus/rules/Blackbox_Exporter.yml
 cat ./prometheus/prometheus.service | sudo tee /etc/systemd/system/prometheus.service
 
 # systemd
