@@ -69,5 +69,16 @@ just to make sure, `sudo` in scripts won't interrupt you. And to install individ
 * Node Exporter: `./node.sh`
 * Blackbox Exporter: `./blackbox.sh`
 * Grafana: `./grafana.sh`
-# Prometheus-install
-# Prometheus-install
+# Creating Grafana Dashboard
+
+* [Node Exporter Full](https://grafana.com/grafana/dashboards/1860)
+* 14513 - Node Exporter Full
+
+* [Node Exporter for Prometheus Dashboard EN v20201010](https://grafana.com/grafana/dashboards/11074)
+* 11074 - Node Exporter for Prometheus Dashboard EN v20201010
+
+Now lets build a dashboard in Grafana so then it will able to reflect the metrics of the Linux system.
+
+So we will use 14513 to import Grafana.com, Lets come to Grafana Home page and you can see a “+” icon.
+Click on that and select “Import”
+
