@@ -2,7 +2,7 @@ global:
   scrape_interval: 15s
 
 rule_files:
-  - 'prometheus.rules.yml'
+  - 'rules/Blackbox_Exporter.yml'
 
 scrape_configs:
 
