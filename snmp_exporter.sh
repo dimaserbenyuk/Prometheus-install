@@ -34,4 +34,4 @@ echo "  - job_name: 'snmp_exporter'
     - source_labels: [__param_target]
       target_label: instance
     - target_label: __address__
-      replacement: localhost:9116
+      replacement: localhost:9116"
