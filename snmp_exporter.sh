@@ -14,8 +14,8 @@ cat ./snmp_exporter/snmp_exporter.service | sudo tee /etc/systemd/system/snmp_ex
 
 # systemd
 sudo systemctl daemon-reload
-sudo systemctl enable snmp-exporter.service
-sudo systemctl start snmp-exporter.service
+sudo systemctl enable snmp_exporter.service
+sudo systemctl start snmp_exporter.service
 
 # Installation cleanup
 rm snmp_exporter-0.20.0.linux-amd64.tar.gz
@@ -35,3 +35,5 @@ echo "  - job_name: 'snmp_exporter'
       target_label: instance
     - target_label: __address__
       replacement: localhost:9116"
+
+sudo systemctl restart prometheus.service
