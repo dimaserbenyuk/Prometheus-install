@@ -1,3 +1,6 @@
+global:
+  resolve_timeout: 5m
+
 route:
   group_by: ['alertname']
   group_wait: 10s
@@ -7,9 +10,10 @@ route:
 receivers:
 - name: 'slack-notifications'
   slack_configs:
-  - api_url: 'webhook-slack....'
+  - api_url: https://hooks......
     channel: '#test'
     send_resolved: true
+
     icon_url: https://avatars3.githubusercontent.com/u/3380462
     title: |-
       [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }} for {{ .CommonLabels.job }}
@@ -42,5 +46,3 @@ inhibit_rules:
     target_match:
       severity: 'warning'
     equal: ['alertname', 'dev', 'instance']
-
-
