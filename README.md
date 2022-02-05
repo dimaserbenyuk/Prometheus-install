@@ -1,23 +1,5 @@
 # Prometheus Installation Script for Ubuntu
 
-**Important:** This is a work in progress.
-
-**Even more important:** If you actually plan to use this do not forget to edit configuration files to your needs (service files, YAML configuration files, etc.). Configuration files provided here are just generic files.
-
-This script downloads the files in the current directory. You could change this.
-
-### To Do
-
-- [ ] Rewrite scripts so one could start it with `sudo ./full_installation` instead of doing `sudo` before script
-
-Any suggestions and contributions are welcome.
-
-If you find any mistake, or suggestion for enhancement that would be great.
-
-# How to Use This?
-
-Whether you are using this to install individual components or the full app, it is best to start scripts from the cloned repository. If you copy scripts anywhere else, the behaviour of the scripts is not guaranteed. **Note that these scripts will add Prometheus and other utilities to systemd as services, and enable the by default**.
-
 ## Full Installation
 
 Full installation will install the following:
@@ -202,3 +184,36 @@ promtool check rules /etc/prometheus/prometheus.rules.yml
 ```
 
 If you want to know more about the prometheus rules, check out the official documentation.
+
+### Setup behind Nginx reverse proxy
+
+Grafana
+/etc/grafana/grafana.ini:
+
+```
+ [server]
+
+# Protocol (http or https)
+protocol = http
+
+# The ip address to bind to, empty will bind to all interfaces
+http_addr = localhost
+
+# The public facing domain name used to access grafana from a browser
+domain = kotori.example.org
+
+# The full public facing url
+root_url = https://example.org/grafana/
+
+```
+### Let’s Encrypt
+
+ln -sr /etc/nginx/sites-available/weather.hiveeyes.org.conf /etc/nginx/sites-enabled/
+
+openssl dhparam -out /etc/nginx/dhparam.pem 2048
+
+nginx -t
+systemctl reload nginx
+
+certbot register --email 'example.org'
+certbot certonly --webroot --domains example.org --webroot-path /var/www/html

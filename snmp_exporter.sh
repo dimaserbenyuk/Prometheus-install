@@ -20,20 +20,3 @@ sudo systemctl start snmp_exporter.service
 # Installation cleanup
 rm snmp_exporter-0.20.0.linux-amd64.tar.gz
 rm -rf snmp_exporter-0.20.0.linux-amd64
-
-echo 'Add the following lines to /etc/prometheus/prometheus.yml:'
-echo "  - job_name: 'snmp_exporter'
-    static_configs:
-    - targets: ['192.168.0.1']
-    metrics_path: /snmp
-    params:
-      module: [if_mib]
-    relabel_configs:
-    - source_labels: [__address__]
-      target_label: __param_target
-    - source_labels: [__param_target]
-      target_label: instance
-    - target_label: __address__
-      replacement: localhost:9116"
-
-sudo systemctl restart prometheus.service

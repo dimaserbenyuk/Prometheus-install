@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Ubuntu 16.04
-
 # Prometheus installation. It's a lousy script though.
 
 # Example:
